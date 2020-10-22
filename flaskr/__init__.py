@@ -22,14 +22,19 @@ def create_app():
     with current_app.open_resource("data.json", "r") as read_file:
       data = json.load(read_file)
 
+    plant_data = data['plant']
     # Get the plant section list
-    plant_selection = []
-    new_plant = request.form.getlist('plant_select')
-    plant_selection.append(new_plant)
+    plant_selection = request.form.getlist('plant_select')
+
+    # loop through the plants to get the required space
+    spaces = []
+    for plant in plant_selection:
+      curr_dict = next(item for item in plant_data if item["name"] == plant)
+      spaces.append(curr_dict["space"])
 
     # return renders the html page at home/index.html
     # home page will return the plant_selection list supplied
-    return render_template('home/index.html', plants=plants, data=plant_selection)
+    return render_template('home/index.html', plants=plants, data=plant_selection, sizes=spaces)
 
   return app
 
