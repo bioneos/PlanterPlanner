@@ -1,0 +1,27 @@
+{
+  "plant": [
+
+    {
+      "name":"tomato",
+      "type":"vegetable",
+      "space":"24",
+      "height":"24"
+    },
+
+    {
+      "name":"zucchini",
+      "type":"vegetable",
+      "space":"36",
+      "height":"12"
+    },
+
+    {
+      "name":"rose",
+      "type":"flower",
+      "space":"36",
+      "height":"36"
+    }
+
+  ]
+
+}
