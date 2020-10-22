@@ -18,8 +18,22 @@
     {
       "name":"rose",
       "type":"flower",
-      "space":"36",
+      "space":"30",
       "height":"36"
+    },
+
+    {
+      "name":"lettuce",
+      "type":"vegetable",
+      "space":"8",
+      "height":"8"
+    },
+
+    {
+      "name":"calla lily",
+      "type":"vegetable",
+      "space":"12",
+      "height":"30"
     }
 
   ]

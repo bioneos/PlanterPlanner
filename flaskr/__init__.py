@@ -16,7 +16,7 @@ def create_app():
   @app.route('/', methods=['GET', 'POST'])
   def home():
     # currently manually defining the plants in our "database"
-    plants = ['tomato', 'zucchini', 'rose']
+    plants = ['tomato', 'zucchini', 'rose', 'lettuce', 'calla lily']
   
     # Read in the data from the .json file
     with current_app.open_resource("data.json", "r") as read_file:
