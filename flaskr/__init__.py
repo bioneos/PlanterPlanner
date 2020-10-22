@@ -23,11 +23,8 @@ def create_app():
       data = json.load(read_file)
 
     plant_selection = []
-    selecting = True
-    while selecting == True:
-      new_plant = request.form.get('plant_select')
-      plant_selection.append(new_plant)
-      selecting = request.form.get('done')
+    new_plant = request.form.getlist('plant_select')
+    plant_selection.append(new_plant)
 
     # return renders the html page at home/index.html
     return render_template('home/index.html', plants=plants, data=plant_selection)

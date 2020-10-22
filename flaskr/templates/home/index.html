@@ -7,7 +7,7 @@ What plants do you have?
 
 <body>
 <form method="POST", action="{{ url_for('home') }}">
-<select name=plant_select method="GET">
+<select multiple name=plant_select method="GET">
   {% for plant in plants %}
     <option value="{{plant}}" SELECTED>{{ plant }}</option>"
   {% endfor %}
@@ -16,7 +16,7 @@ What plants do you have?
 </form>
 
 <form name=done method="POST", action="{{ url_for('home') }}">
-    <button type="submit", value=False>Done</button>
+    <button type="submit", value=False>Clear</button>
 </form>
 
 
