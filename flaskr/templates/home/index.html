@@ -6,14 +6,22 @@ What plants do you have?
 </p>
 
 <body>
-<select name=plants method="GET">
+<form method="POST", action="{{ url_for('home') }}">
+<select name=plant_select method="GET">
   {% for plant in plants %}
     <option value="{{plant}}" SELECTED>{{ plant }}</option>"
   {% endfor %}
 </select>
+<button type="submit">Add</button>
+</form>
+
+<form name=done method="POST", action="{{ url_for('home') }}">
+    <button type="submit", value=False>Done</button>
+</form>
+
 
 <p name=data method="GET">
-{{ data['plant'][0]['name']}}
+{{ data }}
 </p>
 
 </body>
