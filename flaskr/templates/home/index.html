@@ -10,6 +10,10 @@ What plants do you have?
   {% for plant in plants %}
     <option value="{{plant}}" SELECTED>{{ plant }}</option>"
   {% endfor %}
-
 </select>
+
+<p name=data method="GET">
+{{ data['plant'][0]['name']}}
+</p>
+
 </body>
