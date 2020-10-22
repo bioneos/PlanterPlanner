@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request
 
 def create_app():
   # create the app
@@ -9,5 +9,10 @@ def create_app():
   @app.route('/hello')
   def hello():
     return 'Hello, World!'
+
+  @app.route('/', methods=['GET'])
+  def home():
+    plants = ['tomato', 'zucchini', 'rose']
+    return render_template('home/index.html', plants=plants)
 
   return app

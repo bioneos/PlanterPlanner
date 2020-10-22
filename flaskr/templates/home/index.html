@@ -1,0 +1,15 @@
+<title>Planter Planner</title>
+
+<p>
+Welcome to Planter Planner!<br>
+What plants do you have?
+</p>
+
+<body>
+<select name=plants method="GET">
+  {% for plant in plants %}
+    <option value="{{plant}}" SELECTED>{{ plant }}</option>"
+  {% endfor %}
+
+</select>
+</body>
