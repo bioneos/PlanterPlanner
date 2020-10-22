@@ -1,6 +1,12 @@
-{% extends 'base.html' %}
 <title>home page</title>
 
-{% block p %}
 <p>home page content</p>
-{% endblock %}
+
+<body>
+<select name=plants method="GET">
+  {% for plant in plants %}
+    <option value="{{plant}}" SELECTED>{{ plant }}</option>"
+  {% endfor %}
+
+</select>
+</body>
