@@ -22,11 +22,13 @@ def create_app():
     with current_app.open_resource("data.json", "r") as read_file:
       data = json.load(read_file)
 
+    # Get the plant section list
     plant_selection = []
     new_plant = request.form.getlist('plant_select')
     plant_selection.append(new_plant)
 
     # return renders the html page at home/index.html
+    # home page will return the plant_selection list supplied
     return render_template('home/index.html', plants=plants, data=plant_selection)
 
   return app
