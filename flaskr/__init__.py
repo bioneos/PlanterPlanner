@@ -36,6 +36,12 @@ def create_app():
     # home page will return the plant_selection list supplied
     return render_template('home/index.html', plants=plants, data=plant_selection, sizes=spaces)
 
+  @app.route('/plants')
+  def plants():
+    # currently manually defining the plants from our "database"
+    plants = {"plants" : ['tomato', 'zucchini', 'rose', 'lettuce', 'calla lily']}
+    return plants
+
   return app
 
   
