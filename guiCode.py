@@ -49,6 +49,7 @@ def selectPlanter(window,height,width):   #reformat as while loop for invalid en
 def drawPlanter(window, height, width):
     win = window
     planterChoice = selectPlanter(window, height, width)
+    flag = False
 
     if planterChoice == "circle":
         circleSize = Text(Point((win.getWidth())//2, (win.getHeight())//12), "Diameter of planter (inches):")
@@ -59,7 +60,6 @@ def drawPlanter(window, height, width):
         circleSize.undraw()
         sizeSelect.undraw()
         diameter = int(sizeSelect.getText())
-
         drawInstruct = Text(Point((win.getWidth())//2, (win.getHeight())//10), "Click where to create your planter (center)")
         drawInstruct.draw(win)
 
@@ -67,6 +67,23 @@ def drawPlanter(window, height, width):
         #add ability to redraw if not satisfied with location
         myCircle = Circle(drawPoint, (diameter//2)*10)  #determine max scale based on window, make drawn shape take up as much window space as possible "zoom"
         myCircle.draw(win)
+        drawInstruct.undraw()
+
+        confirmPlacement = Text(Point((win.getWidth())//2, (win.getHeight())//10), "Press 'y' if you like the position of the planter, 'n' to reposition")
+        confirmPlacement.draw(win)
+        circleConfirm = win.getKey()
+        while circleConfirm == "n":
+            confirmPlacement.undraw()
+            drawInstruct.draw(win)
+            myCircle.undraw()
+            drawPoint = win.getMouse()
+            drawInstruct.undraw()
+            myCircle = Circle(drawPoint, (diameter//2)*10)
+            myCircle.draw(win)
+            confirmPlacement.draw(win)
+            circleConfirm = win.getKey()
+        if circleConfirm == 'y':
+            confirmPlacement.undraw()
         
 
     elif planterChoice == "rectangle":
