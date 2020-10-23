@@ -46,9 +46,26 @@ def create_app():
   def plantdata():
     # This location just returns the full dictionary that
     # contains all plant data from our database
+    data = readPlantData()
+     
+    return data
+
+  @app.route('/singleplant', methods=["GET"])
+  def singleplant():
+    # get the query information from the request
+    plant_name = request.args.get('plant')
+
+    data = readPlantData()
+    plant_data = data['plant']
+    
+    plant_dict = next(item for item in plant_data if item["name"] == plant_name)
+
+    return plant_dict
+
+  def readPlantData():
     with current_app.open_resource("data.json", "r") as read_file:
       data = json.load(read_file)
-     
+
     return data
 
   return app
