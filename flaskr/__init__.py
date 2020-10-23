@@ -42,6 +42,15 @@ def create_app():
     plants = {"plants" : ['tomato', 'zucchini', 'rose', 'lettuce', 'calla lily']}
     return plants
 
+  @app.route('/plantdata')
+  def plantdata():
+    # This location just returns the full dictionary that
+    # contains all plant data from our database
+    with current_app.open_resource("data.json", "r") as read_file:
+      data = json.load(read_file)
+     
+    return data
+
   return app
 
   
