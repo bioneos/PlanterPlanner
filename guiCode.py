@@ -1,4 +1,5 @@
 from graphics import *
+import requests
 
 def appInstructions(window):
     win = window
@@ -96,7 +97,20 @@ def drawPlanter(window, height, width):
         myRectangle.draw(win)  #needs to be scaled still
     
 
+# function to request the plant names and display them in the window
+def listPlants(window):
+    # Get the plant names through request
+    response = requests.get("http://127.0.0.1:5000/plants")
 
+    # get plant dictionary from json reponse and plant names
+    plant_dict = response.json()
+    plant_list = plant_dict['plants']
+
+    names = "\n".join(plant_list)
+    names_text = Text(Point((window.getWidth())//12, (window.getHeight())//12), names)
+    names_text.draw(window)
+    window.getMouse()
+    names_text.undraw()
 
 def mainFunc():
     win = GraphWin("Planter Planner", 960, 540)
@@ -106,5 +120,6 @@ def mainFunc():
     appInstructions(win)
     drawPlanter(win, winHeight, winWidth)
     win.getMouse()
+    listPlants(win)
 
 mainFunc()
