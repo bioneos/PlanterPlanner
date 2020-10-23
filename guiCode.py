@@ -113,6 +113,7 @@ def listPlants(window):
     names_text.undraw()
 
 # function to select which plants to generate shapes from
+# function returns a dictionary based on the request response
 def selectPlant(win):
     # make the plant selection message and entry box
     plantMsg = Text(Point((win.getWidth())//2, (win.getHeight())//12), "What plant do you want to draw?")
@@ -125,8 +126,14 @@ def selectPlant(win):
     # make the request based on the plant name
     response = requests.get("http://127.0.0.1:5000/singleplant", {"plant" : plant})
 
-    print(plant)
-    print(response.json())
+    return response.json()
+
+# Draw a plant based on the given plant data
+def drawPlant(win, plant_data):
+    plant_size = int(plant_data['space'])
+    drawPoint = win.getMouse()
+    plantCircle = Circle(drawPoint, plant_size)
+    plantCircle.draw(win)
 
 
 def mainFunc():
@@ -138,6 +145,8 @@ def mainFunc():
     drawPlanter(win, winHeight, winWidth)
     win.getMouse()
     listPlants(win)
-    selectPlant(win)
+    plant_data = selectPlant(win)
+    drawPlant(win, plant_data)
+    win.getMouse()
 
 mainFunc()
