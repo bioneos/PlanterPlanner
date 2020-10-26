@@ -13,13 +13,18 @@ def create_app():
     return plants
 
   # route to return all plant data
-  @app.route('/plantdata')
-  def plantdata():
+  @app.route('/plantnames')
+  def plantnames():
     # This location just returns the full dictionary that
     # contains all plant data from our database
     data = readPlantData()
-     
-    return data
+    plant_data = data['plant']
+    plant_names = []
+    for item in plant_data:
+      plant_names.append(item['name'])
+
+    name_dict = {'plants': plant_names}
+    return name_dict
 
   # route the handle requests with the query for
   # data on a single plant

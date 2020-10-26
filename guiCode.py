@@ -138,7 +138,7 @@ def drawPlanter(window, height, width):
 # function to request the plant names and display them in the window
 def listPlants(window):
     # Get the plant names through request
-    response = requests.get("http://127.0.0.1:5000/plants")
+    response = requests.get("http://127.0.0.1:5000/plantnames")
 
     # get plant dictionary from json reponse and plant names
     plant_dict = response.json()
