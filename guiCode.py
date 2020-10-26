@@ -1,15 +1,16 @@
 from graphics import *
 import requests
 
-def appInstructions(window):
+#displays basic instructions/app flow; clicking the mouse progresses the app
+def appInstructions(window):  
     win = window
     instructions = Text(Point((win.getWidth())//2, (win.getHeight())//12),"Instructions:\n1. Select Planter\n 2. Select Size\n 3. Select Plant\n 4. Select Position\n")
     instructions.draw(win)
     win.getMouse()
     instructions.undraw()
 
-
-def selectPlanter(window,height,width):   #reformat as while loop for invalid entry, use the Entry class instead of input
+#allows user to type their planter type, not allowing them to progress until it is a supported option
+def selectPlanter(window,height,width):  
     win = window
     flag = False
 
@@ -44,10 +45,11 @@ def selectPlanter(window,height,width):   #reformat as while loop for invalid en
                 return shape
     
     
-    
-
-def drawPlanter(window, height, width):
-    win = window
+#after a planter type is chosen, the user enters the relevant size parameters of that shape and it is then drawn to the window
+#the shape is then drawn in the window based on where the user clicks, they can the reposition the shape if it isn't in a position they like
+#currently rectangle shaped planters seem to draw irregularly, possibly based on window coord system or the way the Rectangle object is determining corner positions
+def drawPlanter(window, height, width):  
+    win = window                         
     planterChoice = selectPlanter(window, height, width)
     flag = False
 
@@ -64,7 +66,7 @@ def drawPlanter(window, height, width):
         drawInstruct.draw(win)
 
         drawPoint = win.getMouse()
-        #add ability to redraw if not satisfied with location
+    
         myCircle = Circle(drawPoint, (diameter//2)*10)  #determine max scale based on window, make drawn shape take up as much window space as possible "zoom"
         myCircle.draw(win)
         drawInstruct.undraw()
