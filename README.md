@@ -3,7 +3,8 @@ Practice project for Kody and Joey to familiarize with GitFlow
 
 To run the flask app, create a python virtual environment and 
 set the flask app variables by running the following commands
-in terminal.
+in terminal:
+
 python3 -m venv venv
 
 . venv/bin/activate (may not be necessary after previously starting the app)
