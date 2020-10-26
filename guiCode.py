@@ -72,7 +72,7 @@ def drawPlanter(window, height, width):
         confirmPlacement = Text(Point((win.getWidth())//2, (win.getHeight())//10), "Press 'y' if you like the position of the planter, 'n' to reposition")
         confirmPlacement.draw(win)
         circleConfirm = win.getKey()
-        while circleConfirm == "n":
+        while circleConfirm != "y":
             confirmPlacement.undraw()
             drawInstruct.draw(win)
             myCircle.undraw()
@@ -110,8 +110,27 @@ def drawPlanter(window, height, width):
         drawPointX = drawPoint.getX()
         drawPointY = drawPoint.getY()
 
-        myRectangle = Rectangle(drawPoint, Point((drawPointX + length)*2,(drawPointY + width)*2)) #Point((drawPoint.getX()+length)*10,(drawPoint.getY()+width)*10)
+        myRectangle = Rectangle(drawPoint, Point((drawPointX + length)*2,(drawPointY + width)*2))
         myRectangle.draw(win)  #needs to be scaled still
+        drawInstruct.undraw()
+
+        confirmPlacement = Text(Point((win.getWidth())//2, (win.getHeight())//10), "Press 'y' if you like the position of the planter, 'n' to reposition")
+        confirmPlacement.draw(win)
+        recConfirm = win.getKey()
+        while recConfirm != "y":
+            confirmPlacement.undraw()
+            drawInstruct.draw(win)
+            myRectangle.undraw()
+            drawPoint = win.getMouse()
+            drawInstruct.undraw()
+            myRectangle = Rectangle(drawPoint, Point((drawPointX + length)*2,(drawPointY + width)*2))
+            myRectangle.draw(win)
+            confirmPlacement.draw(win)
+            recConfirm = win.getKey()
+        if recConfirm == 'y':
+            confirmPlacement.undraw()
+
+
     
 
 # function to request the plant names and display them in the window
