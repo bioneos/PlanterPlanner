@@ -10,7 +10,7 @@ def create_app():
   def plantnames():
     # This location just returns the full dictionary that
     # contains all plant data from our database
-    data = readPlantData()
+    data = read_plant_data()
     plant_data = data['plant']
     plant_names = []
     for item in plant_data:
@@ -26,17 +26,24 @@ def create_app():
     # get the query information from the request
     plant_name = request.args.get('plant')
 
-    data = readPlantData()
+    data = read_plant_data()
     plant_data = data['plant']
     
     # find the plant information matching the query
     plant_dict = next(item for item in plant_data if item["name"] == plant_name)
 
+    """
+    for item in plant_data:
+      if item["name"] == plant_name:
+        plant_dict = item
+        break
+    """
+
     return plant_dict
 
   # This function acts as our "fake database" call
   # It reads in the plant data from the manually generated data.json file
-  def readPlantData():
+  def read_plant_data():
     with current_app.open_resource("data.json", "r") as read_file:
       data = json.load(read_file)
 

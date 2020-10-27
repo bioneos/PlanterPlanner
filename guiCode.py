@@ -136,7 +136,7 @@ def drawPlanter(window, height, width):
     
 
 # function to request the plant names and display them in the window
-def listPlants(window):
+def list_plants(window):
     # Get the plant names through request
     response = requests.get("http://127.0.0.1:5000/plantnames")
 
@@ -152,13 +152,14 @@ def listPlants(window):
 
 # function to select which plants to generate shapes from
 # function returns a dictionary based on the request response
-def selectPlant(win):
+def select_plant(win):
     # make the plant selection message and entry box
     plantMsg = Text(Point((win.getWidth())//2, (win.getHeight())//12), "What plant do you want to draw?")
     plantMsg.draw(win)
     plantSelect = Entry(Point(win.getWidth()//2, win.getHeight()//8), 20)
     plantSelect.draw(win)
     win.getMouse()
+    # Get the plant name from the user
     plant = plantSelect.getText()
 
     # make the request based on the plant name
@@ -167,7 +168,10 @@ def selectPlant(win):
     return response.json()
 
 # Draw a plant based on the given plant data
-def drawPlant(win, plant_data):
+# Inputs: 
+#    win: graphics window object
+#    plante_data: dictionary with selected plant's data
+def draw_plant(win, plant_data):
     plant_size = int(plant_data['space'])
     drawPoint = win.getMouse()
     plantCircle = Circle(drawPoint, plant_size)
@@ -182,9 +186,9 @@ def mainFunc():
     appInstructions(win)
     drawPlanter(win, winHeight, winWidth)
     win.getMouse()
-    listPlants(win)
-    plant_data = selectPlant(win)
-    drawPlant(win, plant_data)
+    list_plants(win)
+    plant_data = select_plant(win)
+    draw_plant(win, plant_data)
     win.getMouse()
 
 mainFunc()
