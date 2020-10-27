@@ -154,7 +154,7 @@ def draw_planter(window, height, width):
 def list_plants(window):
   win = window
   # Get the plant names through request
-  response = requests.get("http://127.0.0.1:5000/plants")
+  response = requests.get("http://127.0.0.1:5000/plantnames")
 
   # get plant dictionary from json reponse and plant names
   plant_dict = response.json()
