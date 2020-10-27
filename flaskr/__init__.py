@@ -5,13 +5,6 @@ def create_app():
   # create the app
   app = Flask(__name__)
 
-  # route to return all plant names
-  @app.route('/plants')
-  def plants():
-    # currently manually defining the plants from our "database"
-    plants = {"plants" : ['tomato', 'zucchini', 'rose', 'lettuce', 'calla lily']}
-    return plants
-
   # route to return all plant data
   @app.route('/plantnames')
   def plantnames():
