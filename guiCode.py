@@ -148,8 +148,6 @@ def draw_planter(window, height, width):
       if rectangle_confirm == 'y':
         confirm_placement.undraw()
 
-
-    
 #Author: JoeyCicchese
 #Input/Output: window drawn to; N/A
 #Function: request the plant names and display them in the window
@@ -180,6 +178,7 @@ def select_plant(window):
   plant_select = Entry(Point(win.getWidth()//2, win.getHeight()//8), 20)
   plant_select.draw(win)
   win.getMouse()
+  # Get the plant from the user
   plant = plant_select.getText()
 
   # make the request based on the plant name
@@ -193,8 +192,8 @@ def select_plant(window):
 def draw_plant(win, plant_data):
   plant_size = int(plant_data['space'])
   draw_point = win.getMouse()
-  plantCircle = Circle(draw_point, plant_size)
-  plantCircle.draw(win)
+  plant_circle = Circle(draw_point, plant_size)
+  plant_circle.draw(win)
 
 #Author: KodyPetersen
 #Input/Output: N/A; outputs GUI window element

@@ -5,61 +5,29 @@ def create_app():
   # create the app
   app = Flask(__name__)
 
-  # simple hello world page to get the
-  # app running
-  @app.route('/hello')
-  def hello():
-    return 'Hello, World!'
-
-  # app for the main homepage for the user
-  # to select the plants that they have
-  @app.route('/', methods=['GET', 'POST'])
-  def home():
-    # currently manually defining the plants in our "database"
-    plants = ['tomato', 'zucchini', 'rose', 'lettuce', 'calla lily']
-  
-    # Read in the data from the .json file
-    with current_app.open_resource("data.json", "r") as read_file:
-      data = json.load(read_file)
-
-    plant_data = data['plant']
-    # Get the plant section list
-    plant_selection = request.form.getlist('plant_select')
-
-    # loop through the plants to get the required space
-    spaces = []
-    for plant in plant_selection:
-      curr_dict = next(item for item in plant_data if item["name"] == plant)
-      spaces.append(curr_dict["space"])
-
-    # return renders the html page at home/index.html
-    # home page will return the plant_selection list supplied
-    return render_template('home/index.html', plants=plants, data=plant_selection, sizes=spaces)
-
-  # route to return all plant names
-  @app.route('/plants')
-  def plants():
-    # currently manually defining the plants from our "database"
-    plants = {"plants" : ['tomato', 'zucchini', 'rose', 'lettuce', 'calla lily']}
-    return plants
-
   # route to return all plant data
-  @app.route('/plantdata')
-  def plantdata():
+  @app.route('/plantnames')
+  def plantnames():
     # This location just returns the full dictionary that
     # contains all plant data from our database
-    data = readPlantData()
-     
-    return data
+    data = read_plant_data()
+    plant_data = data['plant']
+    plant_names = []
+    for item in plant_data:
+      plant_names.append(item['name'])
 
-  # route the handle requests with the query for
-  # data on a single plant
+    name_dict = {'plants': plant_names}
+    return name_dict
+
+  # route to handle requests with the query for
+  # data on a single plant and returns data
+  # based on a single plant
   @app.route('/singleplant', methods=["GET"])
   def singleplant():
     # get the query information from the request
     plant_name = request.args.get('plant')
 
-    data = readPlantData()
+    data = read_plant_data()
     plant_data = data['plant']
     
     # find the plant information matching the query
@@ -69,7 +37,7 @@ def create_app():
 
   # This function acts as our "fake database" call
   # It reads in the plant data from the manually generated data.json file
-  def readPlantData():
+  def read_plant_data():
     with current_app.open_resource("data.json", "r") as read_file:
       data = json.load(read_file)
 
