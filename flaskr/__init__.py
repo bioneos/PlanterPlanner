@@ -19,8 +19,9 @@ def create_app():
     name_dict = {'plants': plant_names}
     return name_dict
 
-  # route the handle requests with the query for
-  # data on a single plant
+  # route to handle requests with the query for
+  # data on a single plant and returns data
+  # based on a single plant
   @app.route('/singleplant', methods=["GET"])
   def singleplant():
     # get the query information from the request
@@ -31,13 +32,6 @@ def create_app():
     
     # find the plant information matching the query
     plant_dict = next(item for item in plant_data if item["name"] == plant_name)
-
-    """
-    for item in plant_data:
-      if item["name"] == plant_name:
-        plant_dict = item
-        break
-    """
 
     return plant_dict
 
